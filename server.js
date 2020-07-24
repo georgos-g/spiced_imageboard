@@ -19,9 +19,9 @@ const diskStorage = multer.diskStorage({
         callback(null, __dirname + '/uploads');
     },
     filename: function (req, file, callback) {
-      uidSafe(24).then(function(uid) {
-          callback(null, uid + path.extname(file.originalname));
-      });
+        uidSafe(24).then(function(uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
     }
 });
 
@@ -40,7 +40,7 @@ const uploader = multer({
 app.get('/api/v1/images', (request, response)=>{
     
     db.getImages().then(images => {//kann beliebiges wort sein
-      response.json(images); 
+        response.json(images); 
 
       
       
@@ -64,5 +64,5 @@ app.post('/upload', uploader.single('file'), (request, response) => {
     });
 
 });    
-
+//Listen to localhost
 app.listen(8080);
