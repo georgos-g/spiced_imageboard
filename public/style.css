@@ -1,0 +1,30 @@
+#main{
+    background: goldenrod;
+}
+
+#imgwrapper{
+
+    flex-flow: wrap;
+    background: lightcoral;
+}
+
+.upload input[type=text] {
+    margin-bottom: 10px;
+    width: 50%;
+    display: block;
+    padding: 8px 10px;
+    background: #D9D9D9;
+    border: solid 1px #262624;
+}
+.upload input[type=button], .upload button {
+    border-radius: 5px;
+    padding: 8px 16px;
+    background: #626262;
+    color: #000000;
+    border: solid 1px #262624;
+
+}
+
+.img.container {
+text-align: center;
+}
