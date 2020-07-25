@@ -1,6 +1,6 @@
 new Vue({
     el: '#main',
-    data: {
+    data: {// data from the html upload form 
         title: "",
         username: "",
         description: "",
@@ -44,8 +44,8 @@ new Vue({
             
     },
     mounted() {
-        axios.get('api/v1/images').then((responce) => {
-            this.images = responce.data;
+        axios.get('api/v1/images').then((response) => {
+            this.images = response.data;
         });
     },
 

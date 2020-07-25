@@ -1,15 +1,16 @@
 const spicedPG = require('spiced-pg');
+// eslint-disable-next-line no-unused-vars
 const { query } = require('express');
-const db = spicedPG('postgres:georgos:georgos@localhost:5432/imageboard')
+const db = spicedPG('postgres:georgos:georgos@localhost:5432/imageboard');
 //(process.env.DATABASE_URL || 'postgres:georgos:georgos@localhost:5432/imageboard');
 
 
 exports.getImages = () => {
     return db.query
-        //order files in json
-        ('SELECT * FROM images ORDER BY created_at DESC;').then(result => {
-            return result.rows;
-        });
+    //order files in json
+    ('SELECT * FROM images ORDER BY created_at DESC;').then(result => {
+        return result.rows;
+    });
     
 };
 

@@ -4,7 +4,13 @@
 
 #imgwrapper{
 
+    display: flex;
     flex-flow: wrap;
+    padding-right: 10px;
+    /* align-content: stretch;
+    align-items: stretch;
+    justify-content: space-between;
+     */
     background: lightcoral;
 }
 
@@ -25,6 +31,15 @@
 
 }
 
-.img.container {
+#img.container {
+    
 text-align: center;
+
+
+    
+}
+
+img {
+    width: 400px;
+    height: 300px;
 }

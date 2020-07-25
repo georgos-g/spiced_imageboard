@@ -35,11 +35,11 @@ const uploader = multer({
 
 
 
-//app.use(require('body-parser')());
+
 
 app.get('/api/v1/images', (request, response)=>{
     
-    db.getImages().then(images => {//kann beliebiges wort sein
+    db.getImages().then(images => {
         response.json(images); 
 
       
@@ -60,9 +60,10 @@ app.post('/upload', uploader.single('file'), (request, response) => {
         response.json({
             success: true,
             fileURL: s3ImageURL,
+            //...imageInfoFromDB,
         });
     });
 
 });    
-//Listen to localhost
+//Listen to localhost --
 app.listen(8080);

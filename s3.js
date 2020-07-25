@@ -3,6 +3,7 @@ const aws = require ('aws-sdk');
 const fs = require ('fs');
 
 
+
 const s3 = new aws.S3({
     accessKeyId: secrets.AWS_KEY,
     secretAccessKey: secrets.AWS_SECRET
@@ -18,7 +19,7 @@ exports.uploadFile = (fileFromRequest) => {
         Body: fs.createReadStream(path),
         ContentType: mimetype,
         ContentLength: size
-    }).promise().then(responce => {
+    }).promise().then(response => {
         return { success: true };
         
     });
@@ -27,4 +28,4 @@ exports.uploadFile = (fileFromRequest) => {
 exports.generateBucketURL = filename => {
     return `https://${secrets.AWS_BUCKET_NAME}.s3.amazonaws.com/${filename}`;
    
-}
+};
