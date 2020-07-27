@@ -1,17 +1,22 @@
-#main{
-    background: goldenrod;
+body{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
+#main{
+    background: rgb(116, 113, 106);
+    padding: 20px;}
+   
 
 #imgwrapper{
 
     display: flex;
     flex-flow: wrap;
-    padding-right: 10px;
+    
     /* align-content: stretch;
     align-items: stretch;
     justify-content: space-between;
      */
-    background: lightcoral;
+   
 }
 
 .upload input[type=text] {
@@ -36,10 +41,40 @@
 text-align: center;
 
 
-    
+
+
 }
 
 img {
+    padding-right: 20px;
+    padding-top: 20px;
+   
     width: 400px;
     height: 300px;
+}
+
+.imginner{
+    color: #1b1b1b;
+    font-size: 16px;
+    border-radius: 4px;
+    width: 380px;
+    padding: 10px;
+    background: rgba(0,0,0,0.2);
+}
+
+.img-overlay {
+    background: rgb(89, 88, 89);
+    box-shadow: 10px;
+    color: white;
+    width: 700px;
+    height: 500px;
+    font-size: 20px;
+    box-shadow: 10px 10px 20px rgba(0,0,0,0.3);
+    transform: translate(150px, -300px);
+}
+
+.img-overlay .close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }

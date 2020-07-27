@@ -8,6 +8,7 @@ new Vue({
         
         
         images: [],
+        selectedImage: false
 
     },
 
@@ -43,10 +44,45 @@ new Vue({
         }
             
     },
-    mounted() {
+    mounted: function() {//when vue.js is loaded function starts
         axios.get('api/v1/images').then((response) => {
             this.images = response.data;
         });
     },
+
+});
+
+//COMPONENT
+
+Vue.component('img-overlay', {
+    template: '#template-img-overlay',
+    probs: ['title', 'description', 'imageURL', 'comments'],
+    data: function () {
+        return {
+            title: ''
+            description: ''
+            imageURL: ''
+            comments: ''
+        }
+    },
+
+    mounted: function() {//img overlay
+        axios.get('api/v1/images/overlay' +this.id).then((response) => {
+            this.title = imageInfo.title;
+            this.title = imageInfo.description;
+            this.title = imageInfo.imageURL;
+            this.title = imageInfo.comments;
+          
+
+        });
+    },
+
+    methods: {
+        closeSign: function() {
+            console.log("close the overlay");
+            this.$emit('close');
+        }
+    },
+    
 
 });

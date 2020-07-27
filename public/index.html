@@ -28,20 +28,25 @@
 
 <div id="imgwrapper">
 
-    <div v-for="image in images" class="imgwrapper">
-        <img v-bind:src="image.url" v-bind:alt='image-title'>
+    <div v-for="image in images" :key="image.id" >
+        <img v-bind:src="image.url" v-on:click='selectedImage=image.id' v-bind:alt='image-title'>
+
+       <div class="imginner">Title: {{ image.title }}, ID:{{ image.id }}
+           <br>"{{ image.description }}"
+       </div>
+       
 
 
 
-        <div class="title">{{ image.title }}</div>
-        <div class="username">{{ image.username }}</div>
+       <!-- Vue.component --------------------------------------->
+       <img-overlay v-on:close="selectedImage=false" v-if="selectedImage"  v-bind:name="selectedImage.image" v-on:click="selectedImage"></img-overlay>
+    
+        
+
+
+
+
     </div>
-
-
-
-
-
-
 
     </div>
 
@@ -53,5 +58,25 @@
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
     <script src="/js/imageboard.js"></script>
+
+    <script type="text/x-template" id="template-img-overlay">
+        <div class="img-overlay">
+            
+            <button v-on:click="closeSign" class="close">x</button>
+            
+            <h1>IMG Overlay!</h1>
+            <h2>{{ title}}</h2>
+            <p>{{ description }}</p>
+
+            <div>
+
+            </div>
+            
+        </div>  
+
+        
+    </script>
+
+
 </body>
 </html>

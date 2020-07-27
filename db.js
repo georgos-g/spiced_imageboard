@@ -1,6 +1,4 @@
 const spicedPG = require('spiced-pg');
-// eslint-disable-next-line no-unused-vars
-const { query } = require('express');
 const db = spicedPG('postgres:georgos:georgos@localhost:5432/imageboard');
 //(process.env.DATABASE_URL || 'postgres:georgos:georgos@localhost:5432/imageboard');
 
@@ -18,4 +16,14 @@ exports.addImage = (url, username, title, description) => {
     return db.query('INSERT INTO images (url, username, title, description VALUES($1, $2, $3, $4) RETURNING *;',
         [url, username, title, description]);
     
+};
+
+
+
+exports.getOverlayImage = (imageId) => {
+    return db.query(`SELECT * FROM images WHERE id = $1;`,
+        [imageId])
+        .then((result) => {
+            return result.rows [0];
+        });
 };

@@ -9,11 +9,11 @@ const s3 = require('./s3.js');
 const db = require('./db.js');
 const app = express();
 app.use(express.static('public'));
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('uploads'));//uploads is the static folder
 
 
 
-//multer
+//multer 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, __dirname + '/uploads');
@@ -41,13 +41,10 @@ app.get('/api/v1/images', (request, response)=>{
     
     db.getImages().then(images => {
         response.json(images); 
-
-      
-      
     });
-    
-    
 });
+
+
 
 
 //upload files
@@ -55,15 +52,25 @@ app.post('/upload', uploader.single('file'), (request, response) => {
     const s3ImageURL = s3.generateBucketURL(request.file.filename);
     s3.uploadFile(request.file).then(result =>{
 
-        
-        
         response.json({
             success: true,
             fileURL: s3ImageURL,
             //...imageInfoFromDB,
         });
     });
-
 });    
+
+//get image overlay ------IMAGEinfo
+app.get('/api/v1/image/overlay/:id', (request, response) => {
+    
+    db.getOverlayImage(request.params.id).then(imageInfo => {
+        response.json(imageInfo); 
+    });
+    //catch error 
+});
+
+
+
+
 //Listen to localhost --
 app.listen(8080);
