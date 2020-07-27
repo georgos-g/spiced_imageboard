@@ -36,6 +36,12 @@ body{
 
 }
 
+.form-fields {
+    position: absolute;
+    width: 600px;
+    height: 99px;
+}
+
 #img.container {
     
 text-align: center;
@@ -48,9 +54,10 @@ text-align: center;
 img {
     padding-right: 20px;
     padding-top: 20px;
-   
+    cursor: pointer;
     width: 400px;
     height: 300px;
+    object-fit: cover;
 }
 
 .imginner{
@@ -62,15 +69,21 @@ img {
     background: rgba(0,0,0,0.2);
 }
 
-.img-overlay {
-    background: rgb(89, 88, 89);
-    box-shadow: 10px;
+.img-overlay{
+    
+    position: absolute;
+    padding-left: 30px;
+    background: rgba(89, 88, 89, 0.99);
+    border-radius: 5px;
     color: white;
-    width: 700px;
-    height: 500px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 999px;
+    height: 600px;
     font-size: 20px;
     box-shadow: 10px 10px 20px rgba(0,0,0,0.3);
-    transform: translate(150px, -300px);
+    
 }
 
 .img-overlay .close {

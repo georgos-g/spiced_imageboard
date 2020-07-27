@@ -8,7 +8,7 @@ new Vue({
         
         
         images: [],
-        selectedImage: false
+        selectedImageId: false
 
     },
 
@@ -56,23 +56,22 @@ new Vue({
 
 Vue.component('img-overlay', {
     template: '#template-img-overlay',
-    probs: ['title', 'description', 'imageURL', 'comments'],
+    props: ['id'],
     data: function () {
         return {
-            title: ''
-            description: ''
-            imageURL: ''
-            comments: ''
-        }
+            title: '',
+            description: '',
+            imageURL: '',
+            comments: [],
+        };
     },
 
     mounted: function() {//img overlay
-        axios.get('api/v1/images/overlay' +this.id).then((response) => {
-            this.title = imageInfo.title;
-            this.title = imageInfo.description;
-            this.title = imageInfo.imageURL;
-            this.title = imageInfo.comments;
-          
+        axios.get('api/v1/image/' + this.id).then((response) => {
+            this.title = response.data.title;
+            this.description = response.data.description;
+            this.imageURL = response.data.url;
+            
 
         });
     },

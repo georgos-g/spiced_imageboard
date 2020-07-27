@@ -50,23 +50,44 @@ app.get('/api/v1/images', (request, response)=>{
 //upload files
 app.post('/upload', uploader.single('file'), (request, response) => {
     const s3ImageURL = s3.generateBucketURL(request.file.filename);
-    s3.uploadFile(request.file).then(result =>{
+    s3.uploadFile(request.file)
+        .then(() => {
+            const { username, title, description } = request.body;
+            return db.addImage(s3ImageURL, username, title, description);
+        
+        })
+        .then((resultFromDb) => {
+            const imageInfoFromDB = resultFromDb.rows[0];
+           
+            
+            response.json({
+                success: true,
+                fileURL: s3ImageURL,
+                
+            });
+        
+            
+        })
+        .catch((error) => {
+            response.status(500).json({
+                success: false,
+                error: error,
 
-        response.json({
-            success: true,
-            fileURL: s3ImageURL,
-            //...imageInfoFromDB,
+
+            });
+        
         });
-    });
 });    
 
 //get image overlay ------IMAGEinfo
-app.get('/api/v1/image/overlay/:id', (request, response) => {
+app.get('/api/v1/image/:id', (request, response) => {
     
     db.getOverlayImage(request.params.id).then(imageInfo => {
         response.json(imageInfo); 
     });
     //catch error 
+
+
 });
 
 
