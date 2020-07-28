@@ -36,8 +36,20 @@ DROP TABLE IF EXISTS comments;
 
 CREATE TABLE comments (
     id SERIAL PRIMARY KEY,
-    comment_username VARCHAR NOT NULL UNIQUE,
-    comment_text TEXT,
-    comment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    username VARCHAR NOT NULL,
+    description VARCHAR (1000),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     image_id INTEGER NOT NULL UNIQUE REFERENCES images(id)
 );
+
+
+INSERT INTO comments (username, description, image_id) 
+VALUES ('Georgos Gakis', '....das ist ein Test', 1); 
+
+INSERT INTO comments (username, description, image_id) 
+VALUES ('Michalis Papas', '....auch das ist ein Test', 2); 
+
+
+
+
+

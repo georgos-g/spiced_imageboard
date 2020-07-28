@@ -1,13 +1,11 @@
 const express = require('express');
-
-
-
 const multer = require('multer');
 const uidSafe = require('uid-safe');
 const path = require('path');
 const s3 = require('./s3.js');
 const db = require('./db.js');
 const app = express();
+
 app.use(express.static('public'));
 app.use('/uploads', express.static('uploads'));//uploads is the static folder
 
@@ -52,25 +50,20 @@ app.get('/api/v1/images', (request, response)=>{
 app.post('/upload', uploader.single('file'), (request, response) => {
     const s3ImageURL = s3.generateBucketURL(request.file.filename);
     s3.uploadFile(request.file)
+        
         .then(() => {
             const { username, title, description } = request.body;
-            return db.addImage(s3ImageURL, username, title, description);
-
-            //
-        
+            return db.addImage(s3ImageURL, username, title, description);                  
         })
+
         .then((resultFromDb) => {
             const imageInfoFromDB = resultFromDb.rows[0];
-           
-            
             response.json({
                 success: true,
-                fileURL: s3ImageURL,
-                
-            });
-        
-            
+                fileURL: s3ImageURL,            
+            });                    
         })
+
         .catch((error) => {
             response.status(500).json({
                 success: false,
@@ -80,7 +73,7 @@ app.post('/upload', uploader.single('file'), (request, response) => {
             });
         
         });
-});    
+}); 
 
 //get image overlay ------IMAGEinfo
 app.get('/api/v1/image/:id', (request, response) => {
@@ -99,8 +92,46 @@ app.get('/api/v1/image/:id', (request, response) => {
         });
 
 });
+//IMG COMMENTS --------------------------------------------------------
+
+app.get('api/v1/comments-for-image/:imageID', (request, response) => {
+    const imageId = request.params.imageId; 
+
+    db.getImgComments(request).then(comments => {
+        response.json(comments); 
+        
+    })
+        .catch((error) => {
+            response.status(500).send('...unfortunately there is an Error!')
+                .json({
+                    success: false,
+                    error: error              
+                });
+
+        });
+    
+});
 
 
+app.post('api/v1/comments-for-image-create', (request, response) => {
+    const image_id = request.body.image_id;
+    const username = request.body.username;
+    const description = request.body.description;
+    //save info to DB
+    db.addImgComment(image_id, username, description).then(newCreatedComments => {
+        //return data as JSON strings
+        response.json(newCreatedComments)
+            .catch((error) => {
+                response.status(500).send('...unfortunately there is an Error!')
+                    .json({
+                        success: false,
+                        error: error              
+                    });
+
+            });
+        
+    }); 
+});
 
 
 //Listen to localhost --

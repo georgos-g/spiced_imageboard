@@ -31,7 +31,7 @@
     <div v-for="image in images" :key="image.id">
         <img v-bind:src="image.url" v-on:click='selectedImageId=image.id' v-bind:alt='image-title'>
 
-       <div class="img_wrap_text">Title: {{ image.title }}, ID:{{ image.id }}
+       <div class="img_wrap_text">{{ image.title }}, ID:{{ image.id }}
            <br>"{{ image.description }}"
        </div>
        
@@ -45,9 +45,9 @@
        
     </div>
     
-           <!-- Vue.component --------------------------------------->
-           <img-overlay v-on:close="selectedImageId=false" v-if="selectedImageId"  
-           v-bind:name="selectedImageId.image" v-on:click="selectedImageId" v-bind:id='selectedImageId'>
+<!-- Vue.component --------------------------------------->
+<img-overlay v-on:close="selectedImageId=false" v-if="selectedImageId"  
+     v-bind:name="selectedImageId.image" v-on:click="selectedImageId" v-bind:id='selectedImageId'>
         
         </img-overlay>
 
@@ -67,10 +67,15 @@
             
             <button v-on:click="closeSign" class="close">x</button>
             
-            <h1>IMG Overlay!</h1>
             <h2>{{ title}}</h2>
             <p>{{ description }}</p>
-            <img v-bind:src="imageURL" alt="">
+            <div class='comments'>
+            <div class='comments_img'><img v-bind:src="imageURL" alt="image-title"></div>
+            <div class='comments_text'> <p>TEST</p></div>
+               
+            </div>
+
+
 
             <div>
 

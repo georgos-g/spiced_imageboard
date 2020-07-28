@@ -26,17 +26,20 @@ exports.getOverlayImage = (imageId) => {
         });
 };
 
-// Comment
-
-exports.addComment = (image_id, comment_username, comment_text, comment_date) => {
-    return db.query(`INSERT INTO comments (image_id, comment_username, comment_text, comment_date) VALUES($1, $2, $3, $4) RETURNING *;`,
-        [image_id, comment_username, comment_text, comment_date]);
+// Comment 
+exports.getImgComments = (image_id,) => {
+    return db.query(`SELECT * FROM comments WHERE id = $1`,
+        [image_id])
+        .then((result) => {
+            return result.rows[0];
+            
+        });
 
 };
 
-exports.getComments = (image_id, comment_date, comment_username, comment_text) => {
-    return db.query(`SELECT * FROM comments WHERE id = $1, $2, $3, $4`,
-        [image_id, comment_date, comment_username, comment_text])
+exports.addImgComment = (image_id, username, description) => {
+    return db.query(`INSERT INTO comments (image_id, username, description) VALUES($1, $2, $3) RETURNING *;`,
+        [image_id, username, description])
         .then((result) => {
             return result.rows[0];
             

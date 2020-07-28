@@ -27,6 +27,7 @@ body{
     background: #D9D9D9;
     border: solid 1px #262624;
 }
+
 .upload input[type=button], .upload button {
     border-radius: 5px;
     padding: 8px 16px;
@@ -45,9 +46,6 @@ body{
 #img.container {
     
 text-align: center;
-
-
-
 
 }
 
@@ -83,8 +81,10 @@ img {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 999px;
-    height: 600px;
+    max-width: 80%;
+    min-width: 500px;
+    min-height: 600px;
+    max-height: 80%;
     font-size: 20px;
     box-shadow: 10px 10px 20px rgba(0,0,0,0.3);
     
@@ -94,4 +94,8 @@ img {
     position: absolute;
     right: 10px;
     top: 10px;
+}
+
+.comments {
+    float: left;
 }
