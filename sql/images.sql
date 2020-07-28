@@ -9,6 +9,8 @@ CREATE TABLE images(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+
+
 INSERT INTO images (url, username, title, description) VALUES (
     'https://s3.amazonaws.com/spicedling/jAVZmnxnZ-U95ap2-PLliFFF7TO0KqZm.jpg',
     'funkychicken',
@@ -28,4 +30,14 @@ INSERT INTO images (url, username, title, description) VALUES (
     'discoduck',
     'To be or not to be',
     'That is the question.'
+);
+
+DROP TABLE IF EXISTS comments;
+
+CREATE TABLE comments (
+    id SERIAL PRIMARY KEY,
+    comment_username VARCHAR NOT NULL UNIQUE,
+    comment_text TEXT,
+    comment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    image_id INTEGER NOT NULL UNIQUE REFERENCES images(id)
 );

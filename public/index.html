@@ -10,7 +10,7 @@
     
 
     <div id='main'>
-        <form class="form-fields">
+        <form class="">
     <h2>UPLOAD YOUR PICS</h2>
     
     
@@ -31,7 +31,7 @@
     <div v-for="image in images" :key="image.id">
         <img v-bind:src="image.url" v-on:click='selectedImageId=image.id' v-bind:alt='image-title'>
 
-       <div class="imginner">Title: {{ image.title }}, ID:{{ image.id }}
+       <div class="img_wrap_text">Title: {{ image.title }}, ID:{{ image.id }}
            <br>"{{ image.description }}"
        </div>
        
@@ -57,7 +57,7 @@
 
 
 
-    <!-- im public ordner  -->
+   
     <script src="/js/vue.js"></script>
     <script src="/js/axios.min.js"></script>
     <script src="/js/imageboard.js"></script>

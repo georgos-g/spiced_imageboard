@@ -40,7 +40,7 @@ new Vue({
                 this.file = '';
                 
                 
-            });
+            });//axios
         }
             
     },

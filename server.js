@@ -13,6 +13,7 @@ app.use('/uploads', express.static('uploads'));//uploads is the static folder
 
 
 
+
 //multer 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
@@ -31,7 +32,7 @@ const uploader = multer({
         fileSize: 5242880//5MB
     }
 });
-
+//-------
 
 
 
@@ -47,13 +48,15 @@ app.get('/api/v1/images', (request, response)=>{
 
 
 
-//upload files
+//upload files to AWS S3 
 app.post('/upload', uploader.single('file'), (request, response) => {
     const s3ImageURL = s3.generateBucketURL(request.file.filename);
     s3.uploadFile(request.file)
         .then(() => {
             const { username, title, description } = request.body;
             return db.addImage(s3ImageURL, username, title, description);
+
+            //
         
         })
         .then((resultFromDb) => {
@@ -84,9 +87,16 @@ app.get('/api/v1/image/:id', (request, response) => {
     
     db.getOverlayImage(request.params.id).then(imageInfo => {
         response.json(imageInfo); 
-    });
-    //catch error 
+    })
+        .catch((error) => {
+            response.status(500).json({
+                success: false,
+                error: error,
 
+
+            });
+    
+        });
 
 });
 

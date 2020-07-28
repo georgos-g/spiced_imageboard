@@ -25,3 +25,21 @@ exports.getOverlayImage = (imageId) => {
             return result.rows [0];
         });
 };
+
+// Comment
+
+exports.addComment = (image_id, comment_username, comment_text, comment_date) => {
+    return db.query(`INSERT INTO comments (image_id, comment_username, comment_text, comment_date) VALUES($1, $2, $3, $4) RETURNING *;`,
+        [image_id, comment_username, comment_text, comment_date]);
+
+};
+
+exports.getComments = (image_id, comment_date, comment_username, comment_text) => {
+    return db.query(`SELECT * FROM comments WHERE id = $1, $2, $3, $4`,
+        [image_id, comment_date, comment_username, comment_text])
+        .then((result) => {
+            return result.rows[0];
+            
+        });
+
+};
