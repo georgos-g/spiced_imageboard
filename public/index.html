@@ -60,30 +60,35 @@
             
             <button v-on:click="closeSign" class="close">x</button>
             
-            <div class='modal_text_img'>
-                
-                <h2>{{ title}}</h2>
-            <p>{{ description }}</p>
-            <img v-bind:src="imageURL" alt="">
-        </div>
-            <div><div class='comments' v-if="comments.length>0"></div>
-                <div class="comment" v-for="comment in comments">
-                    <strong>{{comment.username}}</strong> <br>
-                    {{comment.description}}
-                
-        </div>  
-        <div class='comments_t' v-if="comments.length==0">
-            No input in comments...  
-        </div>
 
-            <!-- <div class='comments_img'><img v-bind:src="imageURL" alt="image-title"></div>
-            <div class='comments_text'> <p>TEST</p></div> -->
+            <!-- Text and Img left -->
+            <div class='modal_text_img'>
+                <h2>{{ title}}</h2>
+                <p>{{ description }}</p>
+                <img v-bind:src="imageURL" alt="">
+            </div>
+
+
+         <div>
+                <div class='comments' v-if="comments.length>0"></div>
+                    
+                    <div 
+                        class="comment" v-for="comment in comments">
+                        <strong>{{comment.username}}</strong> <br>
+                        {{comment.description}}        
+                    </div>  
+
+                    <div v-if="comments.length==0">
+                         No input in comments...  
+                    </div>
+
+            
                
-            <div class="comments-form">
-                <input v-model="comment_username" name="username" placeholder=" Username">
-                <input v-model="comment_description" name="description" placeholder="What is your opinion?">
-                <button v-on:click="sendComment">Send Comments</button>
-            </div></div>
+                    <div class="comments-form">
+                        <input v-model="comment_username" name="username" placeholder=" Username *" required>
+                        <input v-model="comment_description" name="description" placeholder="What is your opinion? *" required>
+                        <button v-on:click="sendComment">Send Comments</button>
+                    </div>
 
 
 
