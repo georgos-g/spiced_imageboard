@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="style.css">
     <title>Image Board</title>
 </head>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <body>
 <header><h1>MY IMAGEBOARD</h1></header>
     
@@ -14,11 +15,11 @@
     <h2>UPLOAD YOUR PICS</h2>
     
     
-    <input type="text" name="title" placeholder="NAME" v-model="username"><br>
+    <input type="text" name="title" placeholder="NAME" v-model="username">
 
     <input type="text" name="title" placeholder="IMAGE TITLE" v-model="title"><br>
     
-    <input type="text" name="title" placeholder="DESCRIPTION OF IMAGE" v-model="description"><br>
+    <input class="description_field" type="text" name="title" placeholder="DESCRIPTION OF IMAGE" v-model="description"><br>
 
     <input v-on:change="fileChanged" type="file" name="file" id="file" accept="image/*">
 
@@ -28,30 +29,22 @@
 
 <div id="imgwrapper">
 
-    <div v-for="image in images" :key="image.id">
-        <img v-bind:src="image.url" v-on:click='selectedImageId=image.id' v-bind:alt='image-title'>
-
-       <div class="img_wrap_text">{{ image.title }}, ID:{{ image.id }}
-           <br>"{{ image.description }}"
-       </div>
-       
-
-
-       
-       
-       
-       
-       
-       
-    </div>
-    
-<!-- Vue.component --------------------------------------->
-<img-overlay v-on:close="selectedImageId=false" v-if="selectedImageId"  
-     v-bind:name="selectedImageId.image" v-on:click="selectedImageId" v-bind:id='selectedImageId'>
+    <a 
+    v-bind:href="'#'+image.id" v-for="image in images" v-on:click="selectedImageId=image.id">
+        <img v-bind:src="image.url" v-bind:alt="image.title"> 
         
+       <div class="img_wrap_text">{{ image.title }}, ID: {{ image.id }}
+           <br>"{{ image.description }}"
+       </div>          
+    </a></div>
+    <div class="up20"><button v-if="showButton" v-on:click="loadmore">More Pics!</button></div>
+
+    <!-- Vue.component --------------------------------------->
+<img-overlay v-on:close="selectedImageId=false" v-if="selectedImageId"  
+     v-bind:name="selectedImageId.image" v-on:click="selectedImageId" v-bind:id='selectedImageId'>       
         </img-overlay>
 
-    </div>
+    
 
 </div>
 
@@ -67,19 +60,34 @@
             
             <button v-on:click="closeSign" class="close">x</button>
             
-            <h2>{{ title}}</h2>
+            <div class='modal_text_img'>
+                
+                <h2>{{ title}}</h2>
             <p>{{ description }}</p>
-            <div class='comments'>
-            <div class='comments_img'><img v-bind:src="imageURL" alt="image-title"></div>
-            <div class='comments_text'> <p>TEST</p></div>
+            <img v-bind:src="imageURL" alt="">
+        </div>
+            <div><div class='comments' v-if="comments.length>0"></div>
+                <div class="comment" v-for="comment in comments">
+                    <strong>{{comment.username}}</strong> <br>
+                    {{comment.description}}
+                
+        </div>  
+        <div class='comments_t' v-if="comments.length==0">
+            No input in comments...  
+        </div>
+
+            <!-- <div class='comments_img'><img v-bind:src="imageURL" alt="image-title"></div>
+            <div class='comments_text'> <p>TEST</p></div> -->
                
-            </div>
+            <div class="comments-form">
+                <input v-model="comment_username" name="username" placeholder=" Username">
+                <input v-model="comment_description" name="description" placeholder="What is your opinion?">
+                <button v-on:click="sendComment">Send Comments</button>
+            </div></div>
 
 
 
-            <div>
-
-            </div>
+           
             
         </div>  
 

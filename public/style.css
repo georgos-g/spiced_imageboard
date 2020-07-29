@@ -1,16 +1,26 @@
-body{
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+body {
+    background: dimgray;
+    color: white;
+    padding-bottom: 40px;
+    font-size: 12px;
+    font-family:   'Montserrat', sans-serif;
+    font-weight: 300;
+    text-align: center ;
 }
 
 #main{
     background: rgb(116, 113, 106);
     padding: 20px;}
    
-
+/* all pics imageboard ---*/
 #imgwrapper{
 
     display: flex;
     flex-flow: wrap;
+    align-items: center;
+  justify-content: center;
+   
     
     /* align-content: stretch;
     align-items: stretch;
@@ -37,24 +47,76 @@ body{
 
 }
 
-.form-fields {
-    position: absolute;
-    width: 600px;
-    height: 99px;
-}
-
 #img.container {
     
 text-align: center;
 
+
 }
 
+
+/* links -----------  */
+a {
+    font-weight: 500;
+    color: rgb(127, 157, 255);
+    text-decoration: none;
+  -webkit-transition: all 0.5s;
+          transition: all 0.5s;
+          
+          
+}
+
+a:hover {
+  
+   text-decoration: aliceblue;
+}
+
+p > a {
+  border-bottom: 0px solid rgba(44, 170, 223, 0);
+  
+}
+
+p > a:visited {
+  color: none;
+  text-decoration: none;
+}
+
+p > a:visited:hover,
+p > a:visited:focus {
+  color: none;
+  text-decoration: none;
+}
+
+p > a:hover,
+p > a:focus {
+  color: none;
+  
+  border-bottom: 0px solid #2caadf;
+}
+
+.down10 {
+    margin-bottom: 10px;
+}
+.up10 {
+    margin-top: 10px;
+}
+
+.down20 {
+    margin-bottom: 20px;
+}
+.up20 {
+    margin-top: 20px;
+}
+
+/* Modal-------------  */
 img {
-    padding-right: 20px;
-    padding-top: 20px;
+    overflow: hidden;
+    border-radius: 3px;
+    margin-right: 20px;
+    margin-top: 20px;
     cursor: pointer;
-    width: 400px;
-    height: 300px;
+    width: 380px;
+    height: 250px;
     object-fit: cover;
 }
 
@@ -62,7 +124,7 @@ img {
     color: #1b1b1b;
     font-size: 14px;
     border-radius: 4px;
-    width: 380px;
+    width: 360px;
     height: 34px;
     padding: 10px;
     background: rgba(0,0,0,0.2);
@@ -72,7 +134,7 @@ img {
 }
 
 .img-overlay{
-    
+    text-align: left;
     position: absolute;
     padding-left: 30px;
     background: rgba(89, 88, 89, 0.99);
@@ -81,12 +143,14 @@ img {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: 80%;
-    min-width: 500px;
-    min-height: 600px;
-    max-height: 80%;
-    font-size: 20px;
+    width: 60%;
+    height: auto;
+    font-size: 14px;
     box-shadow: 10px 10px 20px rgba(0,0,0,0.3);
+    display: flex;
+    
+    padding-bottom: 40px;
+   
     
 }
 
@@ -96,6 +160,47 @@ img {
     top: 10px;
 }
 
-.comments {
-    float: left;
+ /* form-fields ------- */
+.form-fields {
+    position: absolute;
+    width: 600px;
+    height: 99px;
+}
+
+.description_field {
+    width: 324px;
+    
+    
+}
+
+
+/* Comments --------------- */
+.comments-form{
+    bottom: 20px;
+    
+   
+}
+
+.comments{
+width: 40%;
+top: 40px;
+right: 40px;
+    font-size: 12px;
+    text-align: left;
+}
+
+.comment{
+    top: 30px;
+
+   
+    
+}
+.modal_text_img{
+    width: 550px;
+    margin-right: 20px;
+
+}
+
+.comments_t{
+    padding-top: 40px;
 }

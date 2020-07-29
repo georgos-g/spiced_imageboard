@@ -39,7 +39,7 @@ CREATE TABLE comments (
     username VARCHAR NOT NULL,
     description VARCHAR (1000),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    image_id INTEGER NOT NULL UNIQUE REFERENCES images(id)
+    image_id INTEGER NOT NULL REFERENCES images(id)
 );
 
 

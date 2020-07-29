@@ -5,6 +5,7 @@ new Vue({
         username: "",
         description: "",
         file: "",
+        showButton: 'true',
         
         
         images: [],
@@ -39,14 +40,31 @@ new Vue({
                 this.description = '';
                 this.file = '';                  
             });
-        }
+        },
+        loadmore: function () {
+            const lastImage = this.images[this.images.length - 1];
+
+            axios.get("/api/v1/images/" + lastImage.id).then((response) => {
+                for (let image of response.data) {
+                    this.images.push(image);
+                }
+                if (response.data.length < 4) {
+                    this.showButton = false;
+                }
+            });
+        },
             
     },//End Methods
 
     mounted: function() {//when all necessary data are loaded function starts
-        axios.get('api/v1/images').then((response) => {
+        axios.get('api/v1/images/0').then((response) => {
             this.images = response.data;
         });
+        addEventListener("hashchange", () => {
+            //console.log("Hashchange");
+            this.selectedImageId = window.location.hash.replace("#", "");
+        });
+
     },
 
 }); //ENd #main Vue 

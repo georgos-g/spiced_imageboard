@@ -36,9 +36,9 @@ const uploader = multer({
 
 
 
-app.get('/api/v1/images', (request, response)=>{
+app.get('/api/v1/images/:lastImageId', (request, response)=>{
     
-    db.getImages().then(images => {
+    db.getImages(request.params.lastImageId).then((images) => {
         response.json(images); 
     });
 });
@@ -60,7 +60,8 @@ app.post('/upload', uploader.single('file'), (request, response) => {
             const imageInfoFromDB = resultFromDb.rows[0];
             response.json({
                 success: true,
-                fileURL: s3ImageURL,            
+                //fileURL: s3ImageURL, 
+                ...imageInfoFromDB,
             });                    
         })
 
@@ -78,9 +79,10 @@ app.post('/upload', uploader.single('file'), (request, response) => {
 //get image overlay ------IMAGEinfo
 app.get('/api/v1/image/:id', (request, response) => {
     
-    db.getOverlayImage(request.params.id).then(imageInfo => {
-        response.json(imageInfo); 
-    })
+    db.getOverlayImage(request.params.id)
+        .then(imageInfo => {
+            response.json(imageInfo); 
+        })
         .catch((error) => {
             response.status(500).json({
                 success: false,
@@ -94,13 +96,16 @@ app.get('/api/v1/image/:id', (request, response) => {
 });
 //IMG COMMENTS --------------------------------------------------------
 
-app.get('api/v1/comments-for-image/:imageID', (request, response) => {
-    const imageId = request.params.imageId; 
+app.get('/api/v1/comments-for-image/:imageId', (request, response) => {
+    const imageId = request.params.imageId;
+    console.log ("imageId", imageId);  
 
-    db.getImgComments(request).then(comments => {
-        response.json(comments); 
-        
-    })
+    db.getImgComments(imageId)
+        .then((comments) => {
+            response.json(comments); 
+
+        console.log ("comments", comments);  
+        })
         .catch((error) => {
             response.status(500).send('...unfortunately there is an Error!')
                 .json({
@@ -113,25 +118,27 @@ app.get('api/v1/comments-for-image/:imageID', (request, response) => {
 });
 
 
-app.post('api/v1/comments-for-image-create', (request, response) => {
-    const image_id = request.body.image_id;
-    const username = request.body.username;
-    const description = request.body.description;
-    //save info to DB
-    db.addImgComment(image_id, username, description).then(newCreatedComments => {
-        //return data as JSON strings
-        response.json(newCreatedComments)
+app.post('/api/v1/comments-for-image-create', uploader.none(),
+    (request, response) => {
+        const image_id = request.body.image_id;
+        const username = request.body.username;
+        const description = request.body.description;
+        
+        //save info to DB
+        db.addImgComment(image_id, username, description).then(
+            (newCreatedComments) => {
+                //return data as JSON strings
+                response.json(newCreatedComments);
+            })
             .catch((error) => {
-                response.status(500).send('...unfortunately there is an Error!')
-                    .json({
-                        success: false,
-                        error: error              
-                    });
+                response.status(500).send('...unfortunately there is an Error!');
+                console.log ("error", error);    
+                //response.json({success: false, error: error});
 
             });
         
     }); 
-});
+   
 
 
 //Listen to localhost --
