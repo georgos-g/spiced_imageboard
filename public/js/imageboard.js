@@ -89,7 +89,7 @@ Vue.component('img-overlay', {
 
     methods: {
         closeSign: function() {
-            //console.log("close the overlay");
+          
             this.$emit('close');
             history.pushState(false, false, "#");
         },
