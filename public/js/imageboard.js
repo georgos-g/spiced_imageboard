@@ -61,7 +61,7 @@ new Vue({
             this.images = response.data;
         });
         addEventListener("hashchange", () => {
-            //console.log("Hashchange");
+            
             this.selectedImageId = window.location.hash.replace("#", "");
         });
 

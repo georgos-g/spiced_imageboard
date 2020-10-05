@@ -10,36 +10,39 @@
 <header><h1>MY IMAGEBOARD</h1></header>
     
 
-    <div id='main'>
-        <form class="">
-    <h2>UPLOAD YOUR PICS</h2>
+    <div id='main'><h2>UPLOAD YOUR PICS</h2>
+        <div class="form">
+        <form>
     
     
-    <input type="text" name="title" placeholder="NAME" v-model="username">
+    
+    <input class="form_fields" type="text" name="title" placeholder="NAME" v-model="username">
 
-    <input type="text" name="title" placeholder="IMAGE TITLE" v-model="title"><br>
+    <input class="form_fields" type="text" name="title" placeholder="IMAGE TITLE" v-model="title"><br>
     
     <input class="description_field" type="text" name="title" placeholder="DESCRIPTION OF IMAGE" v-model="description"><br>
-
+    <div class="upload_button">
     <input v-on:change="fileChanged" type="file" name="file" id="file" accept="image/*">
 
     <button v-on:click="uploadImage">UPLOAD</button>
+</div>
 
 </form>
-
+</div>
 <div id="imgwrapper">
 
     <a 
     v-bind:href="'#'+image.id" v-for="image in images" v-on:click="selectedImageId=image.id">
         <img v-bind:src="image.url" v-bind:alt="image.title"> 
         
-       <div class="img_wrap_text">{{ image.title }}, ID: {{ image.id }}
+       <div class="img_wrap_text">{{ image.title }}
            <br>"{{ image.description }}"
        </div>          
-    </a></div>
+    </a>
+</div>
     <div class="up20"><button v-if="showButton" v-on:click="loadmore">More Pics!</button></div>
 
-    <!-- Vue.component --------------------------------------->
+    <!-- Vue.component -->
 <img-overlay v-on:close="selectedImageId=false" v-if="selectedImageId"  
      v-bind:name="selectedImageId.image" v-on:click="selectedImageId" v-bind:id='selectedImageId'>       
         </img-overlay>
@@ -51,31 +54,39 @@
 
 
    
-    <script src="/js/vue.js"></script>
-    <script src="/js/axios.min.js"></script>
-    <script src="/js/imageboard.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./js/axios.min.js"></script>
+    <script src="./js/imageboard.js"></script>
+    
 
     <script type="text/x-template" id="template-img-overlay">
-        <div class="img-overlay">
+        
+        <div class='modal'>
+            <div class="img-overlay">
             
             <button v-on:click="closeSign" class="close">x</button>
             
 
             <!-- Text and Img left -->
+            
             <div class='modal_text_img'>
+                <div class="modal_text">
                 <h2>{{ title}}</h2>
-                <p>{{ description }}</p>
+                <p>{{ description }}</p> </div>
                 <img v-bind:src="imageURL" alt="">
             </div>
 
+            
 
-         <div>
+
+         <div class="comment_field">
                 <div class='comments' v-if="comments.length>0"></div>
-                    
-                    <div 
-                        class="comment" v-for="comment in comments">
+                      <h3>Comments</h3>
+                    <div class="comment" v-for="comment in comments">
+                      
                         <strong>{{comment.username}}</strong> <br>
-                        {{comment.description}}        
+                        {{comment.description}}
+                        <hr class="line">        
                     </div>  
 
                     <div v-if="comments.length==0">
@@ -86,14 +97,10 @@
                
                     <div class="comments-form">
                         <input v-model="comment_username" name="username" placeholder=" Username *" required>
-                        <input v-model="comment_description" name="description" placeholder="What is your opinion? *" required>
+                        <input class="field_description" v-model="comment_description" name="description" placeholder="What is your opinion? *" required>
                         <button v-on:click="sendComment">Send Comments</button>
-                    </div>
-
-
-
-           
-            
+                    </div>         
+            </div>  
         </div>  
 
         
