@@ -1,13 +1,14 @@
-const secrets = require ('./secrets.json');
+//const secrets = require ('./secrets.json');
 const aws = require ('aws-sdk');
 const fs = require ('fs');
 
-
-
 const s3 = new aws.S3({
-    accessKeyId: secrets.AWS_KEY,
-    secretAccessKey: secrets.AWS_SECRET
+    //accessKeyId: secrets.AWS_KEY,
+    //secretAccessKey: secrets.AWS_SECRET
+    accessKeyId: process.env.AWS_KEY,
+    secretAccessKey: process.env.AWS_SECRET
 });
+
 
 exports.uploadFile = (fileFromRequest) => {
     const {filename, mimetype, size, path} = fileFromRequest;
