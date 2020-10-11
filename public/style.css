@@ -79,8 +79,7 @@ p > a:focus {
 img {
   overflow: hidden;
   border-radius: 3px;
-  margin-right: 20px;
-  margin-top: 20px;
+  margin: 20px 10px 0px 10px;
   cursor: pointer;
   width: 380px;
   height: 250px;
@@ -123,6 +122,7 @@ img {
   cursor: auto;
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 0;
 }
 
 .img-overlay .close {
@@ -203,8 +203,15 @@ img {
   position: absolute;
   bottom: 20px;
   left: 26px;
+  display: flex;
+  flex-direction: row;
+  
+
 }
 
+.field_description {
+  width: 470px;
+}
 .comments {
   position: absolute;
   width: 40%;
@@ -220,21 +227,21 @@ img {
 }
 
 .img_wrap_text {
-  color: #1b1b1b;
+  color: #cccccc;
   font-size: 14px;
+  font-weight: 100;
   border-radius: 4px;
-  width: 360px;
+  width: 380px;
   height: 34px;
-  padding: 10px;
+  padding: 10px 0px 10px 0px;
+  margin: 0 10px 0 10px;
   background: rgba(0, 0, 0, 0.2);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.field_description {
-  width: 460px;
-}
+
 
 hr {
   background: #333;
