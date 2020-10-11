@@ -1,7 +1,7 @@
 const spicedPG = require('spiced-pg');
-//let dbUrl = spicedPG(process.env.DATABASE_URL || 'postgres:georgos:georgos@localhost:5432/imageboard');
-//const db = dbUrl;
-const db = spicedPG(process.env.DATABASE_URL || 'postgres:georgos:georgos@localhost:5432/imageboard');
+let dbUrl = spicedPG(process.env.DATABASE_URL || 'postgres:georgos:georgos@localhost:5432/imageboard');
+const db = dbUrl;
+//const db = spicedPG(process.env.DATABASE_URL || 'postgres:georgos:georgos@localhost:5432/imageboard');
 //const db = spicedPG('postgres:georgos:georgos@localhost:5432/imageboard');
 
 
