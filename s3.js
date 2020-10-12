@@ -1,7 +1,7 @@
 const aws = require ('aws-sdk');
 const fs = require ('fs');
 
-let secrets;
+let secrets;//
 if (process.env.NODE_ENV == "production") {
     secrets = process.env;
 } else {

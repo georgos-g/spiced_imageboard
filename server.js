@@ -116,6 +116,6 @@ app.post(
     }
 );
 
-//Listen to localhost --
+//Listen to localhost
 app.listen(process.env.PORT || 8080);
 console.log("I'm listening");
