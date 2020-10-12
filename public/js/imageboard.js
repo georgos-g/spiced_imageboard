@@ -54,7 +54,7 @@ new Vue({
             });
         },
             
-    },//End Methods
+    },
 
     mounted: function() {//when all necessary data are loaded function starts
         axios.get('api/v1/images/0').then((response) => {
@@ -67,7 +67,7 @@ new Vue({
 
     },
 
-}); //ENd #main Vue 
+}); 
 
 //COMPONENT
 
@@ -145,4 +145,4 @@ Vue.component('img-overlay', {
         },
     },
 
-}); // End Component
+}); 

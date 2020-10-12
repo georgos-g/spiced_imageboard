@@ -1,12 +1,18 @@
-//const secrets = require ('./secrets.json');
 const aws = require ('aws-sdk');
 const fs = require ('fs');
 
+let secrets;
+if (process.env.NODE_ENV == "production") {
+    secrets = process.env;
+} else {
+    secrets = require("./secrets.json"); 
+}
+
 const s3 = new aws.S3({
-    //accessKeyId: secrets.AWS_KEY,
-    //secretAccessKey: secrets.AWS_SECRET
-    accessKeyId: process.env.AWS_KEY,
-    secretAccessKey: process.env.AWS_SECRET
+    accessKeyId: secrets.AWS_KEY,
+    secretAccessKey: secrets.AWS_SECRET
+    
+  
 });
 
 
@@ -28,5 +34,6 @@ exports.uploadFile = (fileFromRequest) => {
 
 exports.generateBucketURL = filename => {
     return `https://${secrets.AWS_BUCKET_NAME}.s3.amazonaws.com/${filename}`;
+
    
 };
