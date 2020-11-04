@@ -28,6 +28,12 @@ body {
   border-radius: 5px;
 }
 
+#main h2 {
+
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+
 /* all pics imageboard ---*/
 #imgwrapper {
   margin: auto;
