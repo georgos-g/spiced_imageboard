@@ -8,10 +8,10 @@
 </head>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <body>
-<header><h1>ARCHITECTURAL IMAGE BOARD</h1></header>
+    <header><h1>ARCHITECTURAL IMAGE BOARD</h1></header>
     
 
-    <div id='main'><h2>UPLOAD PICS FROM THE GREATEST BUILDINGS</h2>
+    <div id='main'><h2>UPLOAD PICS WITH UNUSUAL BUILDINGS</h2>
         <div class="form">
         <form>
     
@@ -26,31 +26,33 @@
     <input v-on:change="fileChanged" type="file" name="file" id="file" accept="image/*">
 
     <button v-on:click="uploadImage">UPLOAD</button>
-</div>
+    </div>
 
-</form>
-</div>
-<div id="imgwrapper">
+        </form>
+        </div>
+    <div id="imgwrapper">
 
-    <a 
-    v-bind:href="'#'+image.id" v-for="image in images" v-on:click="selectedImageId=image.id">
-        <img v-bind:src="image.url" v-bind:alt="image.title"> 
-        
-       <div class="img_wrap_text">{{ image.title }}
-           <br>"{{ image.description }}"
-       </div>          
-    </a>
-</div>
+        <a 
+        v-bind:href="'#'+image.id" v-for="image in images" v-on:click="selectedImageId=image.id">
+            <img v-bind:src="image.url" v-bind:alt="image.title"> 
+            
+        <div class="img_wrap_text">
+                <div class="img_description"><strong>{{ image.title }}</strong>
+                <br>"{{ image.description }}"
+                </div>
+            </div>          
+        </a>
+    </div>
     <div class="up20"><button v-if="showButton" v-on:click="loadmore">More Pics!</button></div>
 
     <!-- Vue.component -->
-<img-overlay v-on:close="selectedImageId=false" v-if="selectedImageId"  
+    <img-overlay v-on:close="selectedImageId=false" v-if="selectedImageId"  
      v-bind:name="selectedImageId.image" v-on:click="selectedImageId" v-bind:id='selectedImageId'>       
         </img-overlay>
 
     
 
-</div>
+    </div>
 
 
 
