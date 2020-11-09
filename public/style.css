@@ -12,6 +12,28 @@ header h1 {
   font-size: 45px;
   font-weight: 500;
 }
+@media only screen and (max-width: 600px) {
+  header h1 {
+    font-size: 40px;
+    margin: 20px;
+  }
+
+  #main h2{
+    padding: 20px 0 20px 0;
+
+  }
+}
+@media only screen and (max-width: 400px) {
+  header h1 {
+    font-size: 40px;
+    margin: 15px;
+  }
+
+ 
+}
+
+
+
 body {
   /* background: dimgray; */
   color: white;
@@ -29,7 +51,6 @@ body {
 }
 
 #main h2 {
-
   letter-spacing: 2px;
   font-weight: 400;
 }
@@ -252,7 +273,6 @@ img {
   padding: 10px 0px 10px 0px;
   margin: 0 10px 0 10px;
   background: rgba(0, 0, 0, 0.2);
- 
 }
 .img_description {
   margin-left: 15px;
